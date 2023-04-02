@@ -12,6 +12,7 @@
 <head>
 <meta charset="EUC-KR">
 <title>Insert title here</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 <style>
 @import url(//fonts.googleapis.com/earlyaccess/kopubbatang.css);
 @import url(//fonts.googleapis.com/earlyaccess/jejugothic.css);
@@ -42,16 +43,73 @@
 		font-family: 'Jeju Gothic', sans-serif;
 	}
 	tr:hover{
-		background-color: lightgray;
+		background-color: lightgray !important; 
 	}
 	td .index {
 		background-color: rgb(210, 210, 210);
 	}
+	button {
+		padding: 10px;
+		font : bold;
+		margin-bottom: 10px;
+		border-radius: 10px;
+	}
 </style>
+<script>
+	$(function(){
+		$("thead tr th").click(function(e){
+			var trNum = $(this).closest("th").prevAll().length;
+			console.log(trNum);
+			var a = $("tbody tr").each(function(index, item){
+			var col = $(item).find("td:nth-child(" + (trNum+1) + ")");
+			console.log(col);
+			//되돌리기(기존선택을 clear)
+			$(item).find("td").css("background-color", "white");
+			//신규선택의 색깔 바꾸기
+			$(col).css("background-color", "lightgray");
+			});
+		});
+		
+		//body > table > tbody > tr:nth-child(1) > td:nth-child(2)
+		//body > table > tbody > tr:nth-child(17) > td:nth-child(2)
+		
+		$("button[id='btn1']").css("backgroundColor","lightyellow");
+		$("button[id='btn2']").css("backgroundColor","lightgreen");
+		$("button[id='btn3']").css("backgroundColor","#fff0f5");
+		
+		//body > table > tbody > tr:nth-child(2) > td:nth-child(2)
+		//body > table > tbody > tr:nth-child(4) > td:nth-child(2)
+		$('#btn1').click(function(){
+			$("tbody>tr:nth-child(2n)").css("backgroundColor", "lightyellow");
+		});
+		$('#btn2').click(function(){
+			var r = $("tr>td:nth-child(2):contains('S')");
+			$(r).parent().css("backgroundColor", "lightgreen");
+		});
+		$('#btn3').click(function(){
+			var r = $("tr>td:nth-child(2):");
+			
+			$(r).parent().css("backgroundColor", "#fff0f5");
+			
+			console.log(r);
+			
+		
+		});
+		//});
+	});
+</script>
 </head>
 <body>
 
 	<h1>직원목록</h1>
+	<button onclick = "location.href='emp_insert.html'"
+	type="button" class="btn btn-success">신규직원등록</button>
+	
+	<button id="btn1" class="btn btn-success">짝수row 선택</button>
+	<button id="btn2" class="btn btn-success">이름 s로 시작하는 직원</button>
+	<button id="btn3" class="btn btn-success">s문자 포함</button>
+	
+	
 	<table>
 	<thead>
 	<tr>

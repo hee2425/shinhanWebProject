@@ -95,6 +95,22 @@
 			
 		
 		});
+		
+		
+		var str = "";
+		var arr=["IT_PROG", "AD_VP", "AD_PRES","ST_MAN","ST_CLERK"];
+		$.each(arr, function(index, item){
+			str += "<option>" + item + "</option>";
+		});
+		$("#jobs").html(str);  //html() : jquery 함수, innerHTML은 
+		
+		
+		$("select").change(function(){
+			var jobid = $(this).val();
+			//init();
+			$("tr td").css("color","black");
+			$("tr td:contains('" + jobid + "')").css("color", "red");
+			});
 		//});
 	});
 </script>
@@ -108,7 +124,15 @@
 	<button id="btn1" class="btn btn-success">짝수row 선택</button>
 	<button id="btn2" class="btn btn-success">이름 s로 시작하는 직원</button>
 	<button id="btn3" class="btn btn-success">s문자 포함</button>
-	
+	<select>
+		<option value="IT_PROG">IT_PROG</option>
+		<option>AD_VP</option>
+		<option>PU_CLERK</option>
+		<option>ST_MAN</option>
+	</select>
+	<select id="jobs">
+		
+	</select>
 	
 	<table>
 	<thead>
